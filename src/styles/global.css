@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/* Intelligrade design tokens — paper, ink, and a teacher's red pen.  */
+/* ------------------------------------------------------------------ */
+:root {
+  --paper: #faf6ed;
+  --surface: #ffffff;
+  --ink: #1c2433;
+  --faded: #857e6e;
+  --indigo: #3f4c9c;
+  --redpen: #c33d35;
+  --gold: #c9971c;
+  --teal: #2e7d6e;
+  --line: #e6ddc9;
+  --radius: 14px;
+  --shadow: 0 2px 12px rgba(28, 36, 51, 0.06);
+}
+
+html {
+  background: var(--paper);
+}
+
+body {
+  @apply font-sans text-ink bg-paper antialiased;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+h1, h2, h3 {
+  @apply font-display;
+  letter-spacing: -0.01em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------------------------- Components --------------------------- */
+@layer components {
+  .card {
+    @apply bg-surface border border-line rounded-card shadow-card;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-indigo text-white
+      font-medium text-sm px-5 py-2.5 transition
+      hover:opacity-90 focus-visible:outline focus-visible:outline-2
+      focus-visible:outline-offset-2 focus-visible:outline-indigo
+      disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-transparent text-ink
+      font-medium text-sm px-5 py-2.5 border border-line transition
+      hover:border-ink focus-visible:outline focus-visible:outline-2
+      focus-visible:outline-offset-2 focus-visible:outline-indigo
+      disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+
+  .btn-redpen {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-redpen text-white
+      font-medium text-sm px-5 py-2.5 transition hover:opacity-90
+      focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+      focus-visible:outline-redpen disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+
+  /* Status pills: evaluated = teal tint, evaluating = gold tint + pulsing
+     dot, draft/uploaded = gray. */
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full text-xs font-medium px-2.5 py-1;
+  }
+  .pill-evaluated {
+    color: var(--teal);
+    background: rgba(46, 125, 110, 0.12);
+  }
+  .pill-evaluating {
+    color: var(--gold);
+    background: rgba(201, 151, 28, 0.14);
+  }
+  .pill-draft {
+    color: var(--faded);
+    background: rgba(133, 126, 110, 0.12);
+  }
+  .pill-error {
+    color: var(--redpen);
+    background: rgba(195, 61, 53, 0.1);
+  }
+
+  .pulse-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: currentColor;
+    animation: pulse-dot 1.4s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.35; transform: scale(0.75); }
+  }
+
+  /* The signature marginalia remark: handwritten Caveat in red-pen ink,
+     thin red left border, quote-squiggle icon. Used everywhere an AI
+     remark appears — never restyled. */
+  .marginalia {
+    position: relative;
+    border-left: 2px solid var(--redpen);
+    padding: 2px 4px 2px 30px;
+    color: var(--redpen);
+    font-family: 'Caveat', cursive;
+    font-size: 1.35rem;
+    line-height: 1.25;
+  }
+  .marginalia .squiggle {
+    position: absolute;
+    left: 8px;
+    top: 4px;
+  }
+
+  .input {
+    @apply w-full rounded-lg border border-line bg-surface px-3.5 py-2.5 text-sm text-ink
+      placeholder:text-faded/70 focus:outline-none focus:border-indigo
+      focus:ring-2 focus:ring-indigo/15 transition;
+  }
+
+  .label {
+    @apply block text-xs font-medium uppercase tracking-wider text-faded mb-1.5;
+  }
+
+  .mono-stat {
+    @apply font-mono tabular-nums;
+  }
+
+  /* Exam ledger row with a colored left border keyed to subject. */
+  .exam-row {
+    @apply card flex items-center gap-4 px-5 py-4 transition hover:shadow-md;
+    border-left-width: 4px;
+  }
+
+  /* Ruled-paper texture for empty states and the hero sheet. */
+  .ruled {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 27px,
+      rgba(63, 76, 156, 0.12) 27px,
+      rgba(63, 76, 156, 0.12) 28px
+    );
+  }
+}
