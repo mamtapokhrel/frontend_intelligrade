@@ -162,9 +162,9 @@ export function EditIcon({ size = 20, className }: IconProps) {
 export function TrashIcon({ size = 20, className }: IconProps) {
   return (
     <svg {...base(size)} className={className}>
-      <path d="M5 7.5c4.7-.6 9.3-.6 14 0" />
-      <path d="M9 7V5.3c0-.7.5-1.1 1.2-1.1h3.6c.7 0 1.2.4 1.2 1.1V7" strokeWidth={1.5} />
-      <path d="M7 7.7c.2 4.3.4 8.5.9 12.4 3.4.4 6.8.4 10.2 0 .5-3.9.7-8.1.9-12.4" />
+      <path d="M4.7 7.4c4.9-.7 9.7-.6 14.6.1" />
+      <path d="M9.2 7c-.3-1.7.3-2.6 1.7-2.8 1.5-.2 2.4.6 2.4 2.2" strokeWidth={1.5} />
+      <path d="M6.8 8c.1 4.3.4 8.4 1 12.1 3-.1 5.9-.1 8.8.1.6-3.8.9-7.9 1-12.1" />
     </svg>
   )
 }
@@ -182,8 +182,8 @@ export function DownloadIcon({ size = 20, className }: IconProps) {
 export function SettingsIcon({ size = 20, className }: IconProps) {
   return (
     <svg {...base(size)} className={className}>
-      <circle cx="12" cy="12" r="3.2" />
-      <path d="M12 4.3v2.3M12 17.4v2.3M19.7 12h-2.3M6.6 12H4.3M17.4 6.6l-1.6 1.6M8.2 15.8l-1.6 1.6M17.4 17.4l-1.6-1.6M8.2 8.2 6.6 6.6" strokeWidth={1.5} />
+      <circle cx="12" cy="12" r="3.1" />
+      <path d="M12 4.8v2.4M19 7.6l-1.8 1.7M19.4 15.8l-2.1 1M13 19.4l-.6-2.5M5.2 17.4l1.7-1.9M5 8.4l2.2-1" strokeWidth={1.5} />
     </svg>
   )
 }
@@ -204,7 +204,7 @@ export const subjectIcons = [BookIcon, FlaskIcon, SigmaIcon, GlobeIcon, PageIcon
 
 /** Subject accent colors (left borders, card top bars) keyed by subject id.
  * The red-pen color is reserved for remarks and errors, never subjects. */
-export const subjectAccents = ['var(--indigo)', 'var(--teal)', 'var(--gold)', '#8a5fa8', '#b0642d']
+export const subjectAccents = ['var(--indigo)', 'var(--teal)', 'var(--gold)', '#6d5470', '#a05a3a']
 
 export function subjectAccent(id: number) {
   return subjectAccents[id % subjectAccents.length]

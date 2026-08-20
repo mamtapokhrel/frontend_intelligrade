@@ -59,6 +59,7 @@ export function ExamEditPage() {
       ) : (
         <>
           <ExamForm
+            heading="Edit exam"
             initialValues={toFormValues(exam)}
             onSubmit={onSubmit}
             submitLabel="Save changes"

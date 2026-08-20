@@ -22,7 +22,7 @@ export function ExamNew() {
 
   return (
     <AppShell>
-      <ExamForm onSubmit={onSubmit} submitLabel="Save exam" cancelTo="/teacher" />
+      <ExamForm heading="Set a new exam" onSubmit={onSubmit} submitLabel="Save exam" cancelTo="/teacher" />
     </AppShell>
   )
 }

@@ -5,8 +5,16 @@ import { api, ApiError } from '../../lib/api'
 import type { Subject } from '../../lib/api'
 import { AppShell } from '../../components/AppShell'
 import { EmptyState } from '../../components/EmptyState'
-import { BackArrowIcon, BookIcon, EditIcon, PlusIcon, TrashIcon, UsersIcon } from '../../components/Icons'
-import { subjectAccent } from '../../components/Icons'
+import {
+  BackArrowIcon,
+  BookIcon,
+  EditIcon,
+  PlusIcon,
+  SubjectGlyph,
+  TrashIcon,
+  UsersIcon,
+  subjectAccent,
+} from '../../components/Icons'
 
 export function SubjectsPage() {
   const queryClient = useQueryClient()
@@ -93,6 +101,9 @@ export function SubjectsPage() {
       <div className="space-y-3">
         {subjects?.map((s) => (
           <div key={s.id} className="exam-row" style={{ borderLeftColor: subjectAccent(s.id) }}>
+            <span className="shrink-0" style={{ color: subjectAccent(s.id) }}>
+              <SubjectGlyph id={s.id} size={20} />
+            </span>
             {editingId === s.id ? (
               <input
                 className="input flex-1"
@@ -111,14 +122,23 @@ export function SubjectsPage() {
 
             <div className="flex shrink-0 items-center gap-1">
               {editingId === s.id ? (
-                <button
-                  type="button"
-                  className="btn-ghost !px-3 !py-1.5 text-xs"
-                  disabled={!editingName.trim() || renameSubject.isPending}
-                  onClick={() => renameSubject.mutate({ id: s.id, name: editingName.trim() })}
-                >
-                  Save
-                </button>
+                <>
+                  <button
+                    type="button"
+                    className="btn-ghost !px-3 !py-1.5 text-xs"
+                    onClick={() => setEditingId(null)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    className="btn-primary !px-3 !py-1.5 text-xs"
+                    disabled={!editingName.trim() || renameSubject.isPending}
+                    onClick={() => renameSubject.mutate({ id: s.id, name: editingName.trim() })}
+                  >
+                    {renameSubject.isPending ? 'Saving…' : 'Save'}
+                  </button>
+                </>
               ) : (
                 <button
                   type="button"
@@ -146,7 +166,7 @@ export function SubjectsPage() {
                 aria-label={`Delete ${s.name}`}
                 title="Delete subject"
                 onClick={() => {
-                  if (confirm(`Delete "${s.name}"? This only works if it has no exams.`)) {
+                  if (confirm(`Delete "${s.name}"? This can't be undone, and only works while it has no exams.`)) {
                     deleteSubject.mutate(s.id)
                   }
                 }}

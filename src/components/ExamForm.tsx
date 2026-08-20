@@ -28,12 +28,14 @@ export type ExamFormValues = z.infer<typeof examFormSchema>
 const emptyQuestion = { text: '', max_marks: 5, sample_answer: '', marking_notes: '' }
 
 export function ExamForm({
+  heading,
   initialValues,
   onSubmit,
   submitLabel,
   cancelTo,
   backLabel = 'Back to the desk',
 }: {
+  heading: string
   initialValues?: ExamFormValues
   onSubmit: (values: ExamFormValues) => Promise<void>
   submitLabel: string
@@ -83,7 +85,7 @@ export function ExamForm({
       </Link>
 
       <div className="mb-8 flex flex-wrap items-end justify-between gap-3">
-        <h1 className="font-display text-3xl">{submitLabel === 'Save exam' ? 'Set a new exam' : 'Edit exam'}</h1>
+        <h1 className="font-display text-3xl">{heading}</h1>
         <span className="mono-stat rounded-lg border border-line bg-surface px-3 py-1.5 text-sm">
           Total: <strong>{totalMarks}</strong> marks
         </span>
